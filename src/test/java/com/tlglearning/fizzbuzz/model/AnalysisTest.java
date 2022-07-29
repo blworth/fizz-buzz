@@ -52,17 +52,14 @@ class AnalysisTest {
   @ParameterizedTest
   @ValueSource(ints = {-1, -3, -5, -15})
   void analyze_negative(int value) {
-    class InvalidInvocation implements Executable {
-      private final int value; //field
-      public InvalidInvocation( int value) {   //constructor
-        this.value = value;
-      }
+    Executable invalidInvocation = new Executable() {        //this is an anonymous class
+
       @Override
       public void execute() throws Throwable {
         analysis.analyze(value);
       }
-    }
-   assertThrows(IllegalArgumentException.class, new InvalidInvocation(value));
+    };
+   assertThrows(IllegalArgumentException.class, invalidInvocation);
   }
 
 }
