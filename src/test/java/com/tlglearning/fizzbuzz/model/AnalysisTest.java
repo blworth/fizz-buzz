@@ -54,13 +54,7 @@ class AnalysisTest {
   void analyze_negative(int value) {
 
     //this is an anonymous class below
-   assertThrows(IllegalArgumentException.class, new Executable() {
-
-     @Override
-     public void execute() throws Throwable {
-       analysis.analyze(value);
-     }
-   });
+   assertThrows(IllegalArgumentException.class, () -> analysis.analyze(value));
   }
 
 }
