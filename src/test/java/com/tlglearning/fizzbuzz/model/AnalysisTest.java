@@ -52,14 +52,15 @@ class AnalysisTest {
   @ParameterizedTest
   @ValueSource(ints = {-1, -3, -5, -15})
   void analyze_negative(int value) {
-    Executable invalidInvocation = new Executable() {        //this is an anonymous class
 
-      @Override
-      public void execute() throws Throwable {
-        analysis.analyze(value);
-      }
-    };
-   assertThrows(IllegalArgumentException.class, invalidInvocation);
+    //this is an anonymous class below
+   assertThrows(IllegalArgumentException.class, new Executable() {
+
+     @Override
+     public void execute() throws Throwable {
+       analysis.analyze(value);
+     }
+   });
   }
 
 }
